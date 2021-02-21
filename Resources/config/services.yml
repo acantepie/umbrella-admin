@@ -1,0 +1,52 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Controllers
+    Umbrella\AdminBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
+    Umbrella\AdminBundle\Controller\SecurityController:
+        bind:
+            $retryTtl: "%umbrella_admin.user.security.password_request_ttl%"
+
+    # Table
+    Umbrella\AdminBundle\DataTable\Column\UserNameColumnType:
+    Umbrella\AdminBundle\DataTable\UserTableType:
+
+    # Form
+    Umbrella\AdminBundle\Form\ProfileType:
+    Umbrella\AdminBundle\Form\UserPasswordConfirmType:
+    Umbrella\AdminBundle\Form\UserType:
+
+    # Security
+    Umbrella\AdminBundle\Security\AuthenticationEntryPoint:
+    Umbrella\AdminBundle\Security\UserProvider:
+    Umbrella\AdminBundle\Security\UserChecker:
+
+    # Services
+    Umbrella\AdminBundle\Services\UserManager:
+    Umbrella\AdminBundle\Services\UserMailer:
+
+    # Sidebar
+    Umbrella\AdminBundle\Menu\SidebarMenu:
+        bind:
+            $ymlPath: "%umbrella_admin.menu.file%"
+        tags:
+          - { name: umbrella.menu.factory, method: createMenu, alias: admin_sidebar }
+          - { name: umbrella.menu.renderer, method: renderMenu, alias: admin_sidebar }
+          - { name: umbrella.breadcrumb.renderer, method: renderBreadcrumb, alias: admin_sidebar }
+    # Twig
+    Umbrella\AdminBundle\Extension\AdminTwigExtension:
+
+    # Maker
+    Umbrella\AdminBundle\Maker\Generator\Generator:
+        bind:
+            $projectDir: "%kernel.project_dir%"
+            $rootNs: 'App'
+    Umbrella\AdminBundle\Maker\MakeTable:
+    Umbrella\AdminBundle\Maker\MakeTree:
+    Umbrella\AdminBundle\Maker\MakeNotification:

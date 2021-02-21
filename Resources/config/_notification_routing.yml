@@ -1,0 +1,3 @@
+umbrella_notification:
+  resource: "@UmbrellaAdminBundle/Controller/NotificationController.php"
+  type: annotation

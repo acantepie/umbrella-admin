@@ -1,0 +1,56 @@
+<?php
+
+namespace Umbrella\AdminBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
+use Umbrella\AdminBundle\Services\UserManager;
+use Umbrella\CoreBundle\Controller\BaseController;
+
+/**
+ * Class AccountController
+ *
+ * @Route("/profile")
+ */
+class ProfileController extends BaseController
+{
+    protected UserManager $userManager;
+
+    /**
+     * ProfileController constructor.
+     */
+    public function __construct(UserManager $userManager)
+    {
+        $this->userManager = $userManager;
+    }
+
+    /**
+     * @Route("")
+     */
+    public function indexAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        if (!$user || !is_a($user, AdminUserInterface::class)) {
+            throw new AccessDeniedException();
+        }
+
+        $settingsForm = $this->createForm($this->getParameter('umbrella_admin.user.profile.form'), $user);
+        $settingsForm->handleRequest($request);
+
+        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
+            $this->userManager->update($user);
+
+            $this->toastSuccess('message.account_updated');
+
+            return $this->redirectToRoute('umbrella_admin_profile_index');
+        }
+
+        return $this->render('@UmbrellaAdmin/Profile/index.html.twig', [
+            'user' => $user,
+            'settings_form' => $settingsForm->createView(),
+        ]);
+    }
+}
