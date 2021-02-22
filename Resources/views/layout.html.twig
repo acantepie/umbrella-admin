@@ -43,10 +43,13 @@
         </body>
     {% endblock %}
 
-    {% block javascripts %}
+    {% block html_template %}
         {% if admin_notification_enabled() %}
             {% include "@UmbrellaAdmin/Notification/template.html.twig" %}
         {% endif %}
+    {% endblock %}
+    
+    {% block javascripts %}
         {% include "@UmbrellaAdmin/_scripts.html.twig" %}
     {% endblock %}
 </html>
