@@ -1,8 +1,8 @@
-<?= "<?php\n"; ?>
+<?php echo "<?php\n"; ?>
 
 namespace App\Notification;
 
-use <?= $entity_notification->getClassName(); ?>;
+use <?php echo $entity_notification->getClassName(); ?>;
 use Doctrine\ORM\EntityManagerInterface;
 use Umbrella\AdminBundle\Notification\NotificationException;
 use Umbrella\AdminBundle\Notification\Provider\NotificationProviderInterface;
