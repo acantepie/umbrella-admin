@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\AdminBundle\Services\UserManager;
 use Umbrella\CoreBundle\Controller\BaseController;
+use function Symfony\Component\Translation\t;
 
 /**
  * Class AccountController
@@ -45,7 +46,7 @@ class ProfileController extends BaseController
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $this->userManager->update($user);
 
-            $this->toastSuccess('message.account_updated');
+            $this->toastSuccess(t('message.account_updated'));
 
             return $this->redirectToRoute(self::PROFILE_ROUTE);
         }

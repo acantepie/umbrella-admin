@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
 <?php } ?>
 use Umbrella\CoreBundle\Controller\BaseController;
-
+use function Symfony\Component\Translation\t;
 
 /**
  * @Route("/<?= $routepath; ?>")
@@ -64,7 +64,7 @@ class <?= $controller->getShortClassName(); ?> extends BaseController
             return $this->jsResponseBuilder()
                 ->closeModal()
                 ->reloadTable()
-                ->toastSuccess('message.entity_updated');
+                ->toastSuccess(t('message.entity_updated'));
         }
 
         return $this->jsResponseBuilder()
@@ -75,7 +75,7 @@ class <?= $controller->getShortClassName(); ?> extends BaseController
 <?php } else { ?>
         if ($form->isSubmitted() && $form->isValid()) {
             $this->persistAndFlush($entity);
-            $this->toastSuccess('message.entity_updated');
+            $this->toastSuccess(t('message.entity_updated'));
             return $this->redirectToRoute('<?= $routename_prefix; ?>_edit', [
                 'id' => $entity->id
             ]);
@@ -98,7 +98,7 @@ class <?= $controller->getShortClassName(); ?> extends BaseController
 
         return $this->jsResponseBuilder()
             ->reloadTable()
-            ->toastSuccess('message.entity_deleted');
+            ->toastSuccess(t('message.entity_deleted'));
     }
 
 }

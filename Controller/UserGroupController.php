@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\AdminBundle\Services\UserGroupManager;
 use Umbrella\CoreBundle\Controller\BaseController;
+use function Symfony\Component\Translation\t;
 
 /**
  * Class UserGroupController.
@@ -52,7 +53,7 @@ class UserGroupController extends BaseController
             return $this->jsResponseBuilder()
                 ->closeModal()
                 ->reloadTable()
-                ->toastSuccess('message.entity_updated');
+                ->toastSuccess(t('message.entity_updated'));
         }
 
         return $this->jsResponseBuilder()
@@ -76,6 +77,6 @@ class UserGroupController extends BaseController
         return $this->jsResponseBuilder()
             ->closeModal()
             ->reloadTable()
-            ->toastSuccess('message.entity_deleted');
+            ->toastSuccess(t('message.entity_deleted'));
     }
 }

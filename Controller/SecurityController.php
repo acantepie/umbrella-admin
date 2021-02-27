@@ -9,6 +9,7 @@ use Umbrella\AdminBundle\Form\UserPasswordConfirmType;
 use Umbrella\AdminBundle\Services\UserMailer;
 use Umbrella\AdminBundle\Services\UserManager;
 use Umbrella\CoreBundle\Controller\BaseController;
+use function Symfony\Component\Translation\t;
 
 /**
  * Class SecurityController.
@@ -111,7 +112,7 @@ class SecurityController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userManager->update($user);
 
-            $this->toastSuccess('message.password_resetted');
+            $this->toastSuccess(t('message.password_resetted'));
 
             return $this->redirectToRoute(self::LOGIN_ROUTE);
         }
