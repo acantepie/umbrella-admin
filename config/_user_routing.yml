@@ -1,15 +1,15 @@
 umbrella_admin_profile_:
-    resource: "@UmbrellaAdminBundle/Controller/ProfileController.php"
+    resource: "../src/Controller/ProfileController.php"
     type: annotation
 
 umbrella_admin_security_:
-    resource: "@UmbrellaAdminBundle/Controller/SecurityController.php"
+    resource: "../src/Controller/SecurityController.php"
     type: annotation
 
 umbrella_admin_user_:
-    resource: "@UmbrellaAdminBundle/Controller/UserController.php"
+    resource: "../src/Controller/UserController.php"
     type: annotation
 
 umbrella_admin_usergroup_:
-    resource: "@UmbrellaAdminBundle/Controller/UserGroupController.php"
+    resource: "../src/Controller/UserGroupController.php"
     type: annotation
