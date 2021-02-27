@@ -5,10 +5,10 @@ namespace Umbrella\AdminBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use function Symfony\Component\Translation\t;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\AdminBundle\Services\UserManager;
 use Umbrella\CoreBundle\Controller\BaseController;
-use function Symfony\Component\Translation\t;
 
 /**
  * Class AccountController
