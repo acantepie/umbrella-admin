@@ -35,7 +35,7 @@ class MakeTable extends AbstractMaker
     protected EntityManagerInterface $em;
 
     protected string $_structure = self::STRUCTURE_NONE;
-    protected string $_directory = '';
+    protected string $_directory = 'Admin';
     protected string $_viewType = self::VIEW_MODAL;
     protected bool $_createTemplate = true;
 
@@ -62,7 +62,7 @@ class MakeTable extends AbstractMaker
 
     public function interact(InputInterface $input, ConsoleStyle $io, Command $command)
     {
-        $this->_directory = $io->askQuestion(new Question('Directory to use for Controller, Table or Form ?', 'Admin'));
+        $this->_directory = $io->askQuestion(new Question('Directory to use for Controller, Table or Form ?', $this->_directory));
         $this->_viewType = $io->askQuestion(new ChoiceQuestion('View type ?', self::VIEW_TYPES, $this->_viewType));
         $this->_createTemplate = $io->askQuestion(new ConfirmationQuestion('Create twig template on project directory ?', $this->_createTemplate));
     }
