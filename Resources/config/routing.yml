@@ -1,5 +1,0 @@
-umbrella_user:
-  resource: "@UmbrellaAdminBundle/Resources/config/_user_routing.yml"
-
-umbrella_notification:
-  resource: "@UmbrellaAdminBundle/Resources/config/_notification_routing.yml"

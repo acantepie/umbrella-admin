@@ -1,8 +1,9 @@
 {
     "name": "umbrella2/adminbundle",
     "type": "symfony-bundle",
-    "description": "Umbrella framework - adminbundle",
-    "keywords": [],
+    "description": "Umbrella Admin Symfony bundle.",
+    "keywords": ["backend", "admin", "umbrella"],
+    "homepage": "https://github.com/acantepie/umbrella-admin",
     "license": "MIT",
     "authors": [
         {
@@ -11,13 +12,9 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Umbrella\\AdminBundle\\": ""}
+        "psr-4": {"Umbrella\\AdminBundle\\": "src/"}
     },
     "require": {
         "umbrella2/corebundle": "dev-master"
-    },
-    "scripts": {
-        "post-install-cmd": [],
-        "post-update-cmd": []
     }
 }

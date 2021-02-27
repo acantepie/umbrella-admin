@@ -6,7 +6,7 @@ services:
 
     # Controllers
     Umbrella\AdminBundle\Controller\:
-        resource: '../../Controller'
+        resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
     Umbrella\AdminBundle\Controller\SecurityController:

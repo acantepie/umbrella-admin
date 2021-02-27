@@ -19,4 +19,9 @@ class UmbrellaAdminBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new MakeCommandRegistrationPass());
     }
+
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
 }

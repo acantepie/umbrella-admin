@@ -33,7 +33,7 @@ class UmbrellaAdminExtension extends Extension implements PrependExtensionInterf
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.yml');
 
         $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin', ['umbrella_admin.user.group.form_roles']);
