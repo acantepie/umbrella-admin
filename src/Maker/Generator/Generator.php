@@ -94,7 +94,7 @@ class Generator
     {
         ob_start();
         extract($parameters, \EXTR_SKIP);
-        include sprintf('%s/../../Resources/skeleton/%s', __DIR__, ltrim($template, '/'));
+        include sprintf('%s/../../../skeleton/%s', __DIR__, ltrim($template, '/'));
 
         return ob_get_clean();
     }
