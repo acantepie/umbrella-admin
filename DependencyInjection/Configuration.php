@@ -5,6 +5,7 @@ namespace Umbrella\AdminBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Umbrella\AdminBundle\Controller\ProfileController;
 use Umbrella\AdminBundle\DataTable\UserGroupTableType;
 use Umbrella\AdminBundle\DataTable\UserTableType;
 use Umbrella\AdminBundle\Form\ProfileType;
@@ -26,6 +27,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('umbrella_admin');
         $rootNode = $treeBuilder->getRootNode();
+
+        $rootNode
+            ->children()
+            ->scalarNode('home_route')->defaultValue('app_admin_default_index');
 
         $this->addMenuSection($rootNode);
         $this->addThemeSection($rootNode);
@@ -65,13 +70,14 @@ class Configuration implements ConfigurationInterface
     private function addUserSection(ArrayNodeDefinition $rootNode)
     {
         $rootNode->children()
+            ->arrayNode('security')->addDefaultsIfNotSet()
+                ->children()
+                    ->integerNode('password_expire_in')->defaultValue(0)->end() // s
+                    ->integerNode('password_request_ttl')->defaultValue(86400)->end() // s
+                ->end()
+            ->end()
             ->arrayNode('user')->addDefaultsIfNotSet()
-            ->children()
-                    ->arrayNode('security')->addDefaultsIfNotSet()
-                        ->children()
-                            ->integerNode('password_request_ttl')->defaultValue(86400)->end()
-                        ->end()
-                    ->end()
+                ->children()
                     ->arrayNode('user')->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('class')->defaultValue('App\\Entity\\User')->end()
@@ -87,8 +93,9 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('form_roles')->scalarPrototype()->end()->defaultValue(['ROLE_ADMIN'])->end()
                         ->end()
                     ->end()
-                    ->arrayNode('profile')->addDefaultsIfNotSet()
+                    ->arrayNode('profile')->addDefaultsIfNotSet()->canBeDisabled()
                         ->children()
+                            ->scalarNode('route')->defaultValue(ProfileController::PROFILE_ROUTE)->end()
                             ->scalarNode('form')->defaultValue(ProfileType::class)->end()
                         ->end()
                     ->end()

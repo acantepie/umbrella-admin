@@ -23,13 +23,13 @@
         <div class=" dropdown-header noti-title">
             <h6 class="text-overflow m-0">{{ 'common.welcome' | trans }} !</h6>
         </div>
-        {% if isAdminUser %}
-            <a href="{{ path(admin_route_profile()) }}" class="dropdown-item notify-item">
+        {% if isAdminUser and admin_profile_enabled() %}
+            <a href="{{ path(admin_profile_route()) }}" class="dropdown-item notify-item">
                 <i class="mdi mdi-account-circle mr-1"></i>
                 <span>{{ 'action.my_account' | trans }}</span>
             </a>
         {% endif %}
-        <a href="{{ path(admin_route_logout()) }}" class="dropdown-item notify-item">
+        <a href="{{ path(constant('Umbrella\\AdminBundle\\Controller\\SecurityController::LOGOUT_ROUTE')) }}" class="dropdown-item notify-item">
             <i class="mdi mdi-logout mr-1"></i>
             <span>{{ 'action.signout' | trans }}</span>
         </a>

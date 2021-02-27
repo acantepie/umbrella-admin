@@ -37,8 +37,6 @@ class UmbrellaAdminExtension extends Extension implements PrependExtensionInterf
         $loader->load('services.yml');
 
         $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin', ['umbrella_admin.user.group.form_roles']);
-        $parameters['umbrella_admin.route.profile'] = 'umbrella_admin_profile_index';
-        $parameters['umbrella_admin.route.logout'] = 'umbrella_admin_logout';
 
         foreach ($parameters as $pKey => $pValue) {
             if (!$container->hasParameter($pKey)) {

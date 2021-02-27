@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Umbrella\AdminBundle\Controller\SecurityController;
 
 /**
  * Class AuthenticationEntryPoint
@@ -49,6 +50,6 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
             return new JsonResponse('', 401);
         }
 
-        return new RedirectResponse($this->router->generate('umbrella_admin_login'));
+        return new RedirectResponse($this->router->generate(SecurityController::LOGIN_ROUTE));
     }
 }

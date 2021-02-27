@@ -81,6 +81,11 @@ interface AdminUserInterface extends UserInterface
     public function setConfirmationToken(?string $confirmationToken);
 
     /**
+     * Return true if password hasn't expired (depends of ttl)
+     */
+    public function isPasswordNonExpired(int $ttl): bool;
+
+    /**
      * Return true if request for new password hasn't expired (depends of ttl)
      */
     public function isPasswordRequestNonExpired(int $ttl): bool;

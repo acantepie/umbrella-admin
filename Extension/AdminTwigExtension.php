@@ -27,16 +27,28 @@ class AdminTwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
+            new TwigFunction('admin_home_route', [$this, 'homeRoute']),
+
             new TwigFunction('admin_theme_name', [$this, 'themeName']),
             new TwigFunction('admin_theme_logo', [$this, 'themeLogo']),
+
             new TwigFunction('admin_script_entry', [$this, 'scriptEntry']),
             new TwigFunction('admin_stylesheet_entry', [$this, 'stylesheetEntry']),
-            new TwigFunction('admin_route_profile', [$this, 'routeProfile']),
-            new TwigFunction('admin_route_logout', [$this, 'routeLogout']),
+
+            new TwigFunction('admin_profile_enabled', [$this, 'profileEnable']),
+            new TwigFunction('admin_profile_route', [$this, 'routeProfile']),
+
             new TwigFunction('admin_notification_enabled', [$this, 'notificationEnabled']),
             new TwigFunction('admin_notification_poll_intervall', [$this, 'notificationPollInterval']),
         ];
     }
+
+    public function homeRoute()
+    {
+        return $this->parameters->get('umbrella_admin.home_route');
+    }
+
+    // Theme
 
     public function themeName()
     {
@@ -48,6 +60,8 @@ class AdminTwigExtension extends AbstractExtension
         return $this->parameters->get('umbrella_admin.theme.logo');
     }
 
+    // Assets
+
     public function scriptEntry()
     {
         return $this->parameters->get('umbrella_admin.assets.script_entry');
@@ -58,15 +72,19 @@ class AdminTwigExtension extends AbstractExtension
         return $this->parameters->get('umbrella_admin.assets.stylesheet_entry');
     }
 
-    public function routeProfile()
+    // User
+
+    public function profileEnable()
     {
-        return $this->parameters->get('umbrella_admin.route.profile');
+        return $this->parameters->get('umbrella_admin.user.profile.enabled');
     }
 
-    public function routeLogout()
+    public function routeProfile()
     {
-        return $this->parameters->get('umbrella_admin.route.logout');
+        return $this->parameters->get('umbrella_admin.user.profile.route');
     }
+
+    // Notification
 
     public function notificationEnabled()
     {
@@ -75,7 +93,6 @@ class AdminTwigExtension extends AbstractExtension
 
     public function notificationPollInterval()
     {
-        return $this->parameters->has('umbrella_admin.notification.poll_interval')
-            ? $this->parameters->get('umbrella_admin.notification.poll_interval') : 0;
+        return $this->parameters->get('umbrella_admin.notification.poll_interval');
     }
 }

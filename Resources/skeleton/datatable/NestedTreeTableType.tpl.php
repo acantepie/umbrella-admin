@@ -1,8 +1,8 @@
-<?php echo "<?php\n"; ?>
+<?= "<?php\n"; ?>
 
-namespace <?php echo $table->getNamespace(); ?>;
+namespace <?= $table->getNamespace(); ?>;
 
-use <?php echo $entity->getClassName(); ?>;
+use <?= $entity->getClassName(); ?>;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
 use Umbrella\CoreBundle\Component\Column\Type\LinkListColumnType;
@@ -12,19 +12,19 @@ use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
 use Umbrella\CoreBundle\Component\UmbrellaLink\UmbrellaLinkList;
 use Umbrella\CoreBundle\Component\Action\Type\AddActionType;
 
-class <?php echo $table->getShortClassName(); ?> extends DataTableType
+class <?= $table->getShortClassName(); ?> extends DataTableType
 {
 
     public function buildToolbar(ToolbarBuilder $builder, array $options = array())
     {
 <?php if ('modal' === $view_type) {  ?>
         $builder->addAction('add', AddActionType::class, array(
-            'route' => '<?php echo $routename_prefix; ?>_edit',
+            'route' => '<?= $routename_prefix; ?>_edit',
             'xhr' => true
         ));
 <?php } else { ?>
         $builder->addAction('add', AddActionType::class, array(
-            'route' => '<?php echo $routename_prefix; ?>_edit'
+            'route' => '<?= $routename_prefix; ?>_edit'
         ));
 <?php } ?>
     }
@@ -33,17 +33,17 @@ class <?php echo $table->getShortClassName(); ?> extends DataTableType
     {
         $builder->add('id', PropertyColumnType::class);
         $builder->add('actions', LinkListColumnType::class, array(
-            'link_builder' => function (UmbrellaLinkList $linkList, <?php echo $entity->getShortClassName(); ?> $entity) {
+            'link_builder' => function (UmbrellaLinkList $linkList, <?= $entity->getShortClassName(); ?> $entity) {
 <?php if ('modal' === $view_type) {  ?>
-                $linkList->addXhrEdit('<?php echo $routename_prefix; ?>_edit', ['id' => $entity->id]);
+                $linkList->addXhrEdit('<?= $routename_prefix; ?>_edit', ['id' => $entity->id]);
 <?php } else { ?>
-                $linkList->addEdit('<?php echo $routename_prefix; ?>_edit', ['id' => $entity->id]);
+                $linkList->addEdit('<?= $routename_prefix; ?>_edit', ['id' => $entity->id]);
 <?php } ?>
-                $linkList->addXhrDelete('<?php echo $routename_prefix; ?>_delete', ['id' => $entity->id]);
+                $linkList->addXhrDelete('<?= $routename_prefix; ?>_delete', ['id' => $entity->id]);
             }
         ));
 
-        $builder->useNestedEntityAdapter(<?php echo $entity->getShortClassName(); ?>::class);
+        $builder->useNestedEntityAdapter(<?= $entity->getShortClassName(); ?>::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

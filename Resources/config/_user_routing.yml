@@ -1,6 +1,3 @@
-umbrella_admin_logout:
-    path: /logout
-
 umbrella_admin_profile_:
     resource: "@UmbrellaAdminBundle/Controller/ProfileController.php"
     type: annotation

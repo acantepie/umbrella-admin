@@ -1,24 +1,24 @@
-<?php echo "<?php\n"; ?>
+<?= "<?php\n"; ?>
 
-namespace <?php echo $entity->getNamespace(); ?>;
+namespace <?= $entity->getNamespace(); ?>;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use <?php echo $repository->getClassName(); ?>;
+use <?= $repository->getClassName(); ?>;
 use Umbrella\CoreBundle\Model\IdTrait;
 use Umbrella\CoreBundle\Model\TimestampTrait;
 use Umbrella\CoreBundle\Model\NestedTreeEntityInterface;
 use Umbrella\CoreBundle\Model\NestedTreeEntityTrait;
 
 /**
- * Class <?php echo $entity->getClassName(); ?>.
+ * Class <?= $entity->getClassName(); ?>.
  *
  * @Gedmo\Tree(type="nested")
- * @ORM\Entity(<?php echo $repository->getShortClassName(); ?>::class)
+ * @ORM\Entity(<?= $repository->getShortClassName(); ?>::class)
  * @ORM\HasLifecycleCallbacks
  */
-class <?php echo $entity->getShortClassName(); ?> implements NestedTreeEntityInterface
+class <?= $entity->getShortClassName(); ?> implements NestedTreeEntityInterface
 {
     use IdTrait;
     use TimestampTrait;
@@ -46,31 +46,31 @@ class <?php echo $entity->getShortClassName(); ?> implements NestedTreeEntityInt
     public $right;
 
     /**
-     * @var <?php echo $entity->getShortClassName(); ?>
+     * @var <?= $entity->getShortClassName(); ?>
      * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="<?php echo $entity->getShortClassName(); ?>")
+     * @ORM\ManyToOne(targetEntity="<?= $entity->getShortClassName(); ?>")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
     public $root;
 
     /**
-     * @var <?php echo $entity->getShortClassName(); ?>|null
+     * @var <?= $entity->getShortClassName(); ?>|null
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="<?php echo $entity->getShortClassName(); ?>", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="<?= $entity->getShortClassName(); ?>", inversedBy="children")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
     public $parent;
 
     /**
-     * @var <?php echo $entity->getShortClassName(); ?>[]|ArrayCollection
+     * @var <?= $entity->getShortClassName(); ?>[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="<?php echo $entity->getShortClassName(); ?>", mappedBy="parent", cascade={"ALL"})
+     * @ORM\OneToMany(targetEntity="<?= $entity->getShortClassName(); ?>", mappedBy="parent", cascade={"ALL"})
      * @ORM\OrderBy({"left": "ASC"})
      */
     public $children;
 
     /**
-     * <?php echo $entity->getShortClassName(); ?> constructor.
+     * <?= $entity->getShortClassName(); ?> constructor.
      */
     public function __construct()
     {

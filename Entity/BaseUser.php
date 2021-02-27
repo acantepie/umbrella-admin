@@ -22,11 +22,12 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
  */
 class BaseUser implements EquatableInterface, \Serializable, AdminUserInterface
 {
+    const ROLE_DEFAULT = 'ROLE_USER';
+
     use ActiveTrait;
     use IdTrait;
     use SearchTrait;
     use TimestampTrait;
-    const ROLE_DEFAULT = 'ROLE_USER';
 
     /**
      * @var string|null
@@ -78,6 +79,12 @@ class BaseUser implements EquatableInterface, \Serializable, AdminUserInterface
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     public $confirmationToken;
+
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    public $passwordUpdatedAt;
 
     /**
      * @var \DateTime|null
@@ -226,6 +233,7 @@ class BaseUser implements EquatableInterface, \Serializable, AdminUserInterface
      */
     public function setPassword($password)
     {
+        $this->passwordUpdatedAt = new \DateTime('NOW');
         $this->password = $password;
         $this->passwordRequestedAt = null;
         $this->confirmationToken = null;
@@ -265,6 +273,15 @@ class BaseUser implements EquatableInterface, \Serializable, AdminUserInterface
         if (null !== $confirmationToken) {
             $this->passwordRequestedAt = new \DateTime();
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPasswordNonExpired(int $ttl): bool
+    {
+        return null === $this->passwordUpdatedAt ||
+            $this->passwordUpdatedAt->getTimestamp() + $ttl > time();
     }
 
     /**

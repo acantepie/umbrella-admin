@@ -16,15 +16,15 @@
 
             {% if error %}
                 <div class="alert alert-warning text-center">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                    {{ error.messageKey|trans(error.messageData, 'security') | raw }}
                 </div>
             {% endif %}
 
-            <form action="{{ path('umbrella_admin_login') }}" method="post">
+            <form action="{{ path(constant('Umbrella\\AdminBundle\\Controller\\SecurityController::LOGIN_ROUTE')) }}" method="post">
 
                 <div class="form-group">
                     <label for="username">{{ 'form.label.username' | trans }}</label>
-                    <input class="form-control" type="text" id="username" required="required" name="_username">
+                    <input class="form-control" type="text" id="username" required="required" name="_username" value="{{ last_username }}">
                 </div>
 
                 <div class="form-group">
@@ -34,6 +34,8 @@
                     <label for="password">{{ 'form.label.password' | trans }}</label>
                     <input class="form-control" type="password" required="required" id="password" name="_password">
                 </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 <div class="form-group mb-0 text-center">
                     <button class="btn btn-primary" type="submit">

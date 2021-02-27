@@ -16,6 +16,8 @@ use Umbrella\CoreBundle\Controller\BaseController;
  */
 class ProfileController extends BaseController
 {
+    const PROFILE_ROUTE = 'umbrella_admin_profile_index';
+
     protected UserManager $userManager;
 
     /**
@@ -45,7 +47,7 @@ class ProfileController extends BaseController
 
             $this->toastSuccess('message.account_updated');
 
-            return $this->redirectToRoute('umbrella_admin_profile_index');
+            return $this->redirectToRoute(self::PROFILE_ROUTE);
         }
 
         return $this->render('@UmbrellaAdmin/Profile/index.html.twig', [

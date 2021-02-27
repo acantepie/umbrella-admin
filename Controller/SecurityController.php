@@ -4,8 +4,6 @@ namespace Umbrella\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Umbrella\AdminBundle\Form\UserPasswordConfirmType;
 use Umbrella\AdminBundle\Services\UserMailer;
@@ -19,6 +17,9 @@ use Umbrella\CoreBundle\Controller\BaseController;
  */
 class SecurityController extends BaseController
 {
+    const LOGIN_ROUTE = 'umbrella_admin_login';
+    const LOGOUT_ROUTE = 'umbrella_admin_logout';
+
     protected UserManager $userManager;
 
     protected int $retryTtl;
@@ -39,11 +40,7 @@ class SecurityController extends BaseController
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        if ($error) {
-            if ($error instanceof AuthenticationServiceException) {
-                $error = new BadCredentialsException();
-            }
-        }
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -51,6 +48,14 @@ class SecurityController extends BaseController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="umbrella_admin_logout", methods={"GET"})
+     */
+    public function logoutAction()
+    {
+        throw new \LogicException();
     }
 
     /**
@@ -74,7 +79,9 @@ class SecurityController extends BaseController
             ]);
         }
 
-        return $this->render('@UmbrellaAdmin/Security/password_request.html.twig');
+        return $this->render('@UmbrellaAdmin/Security/password_request.html.twig', [
+            'email' => $request->query->get('email')
+        ]);
     }
 
     /**
@@ -106,7 +113,7 @@ class SecurityController extends BaseController
 
             $this->toastSuccess('message.password_resetted');
 
-            return $this->redirectToRoute('umbrella_admin_login');
+            return $this->redirectToRoute(self::LOGIN_ROUTE);
         }
 
         return $this->render('@UmbrellaAdmin/Security/password_reset.html.twig', [

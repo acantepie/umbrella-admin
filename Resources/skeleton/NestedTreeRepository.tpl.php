@@ -1,26 +1,26 @@
-<?php echo "<?php\n"; ?>
+<?= "<?php\n"; ?>
 
-namespace <?php echo $repository->getNamespace(); ?>;
+namespace <?= $repository->getNamespace(); ?>;
 
-use <?php echo $entity->getClassName(); ?>;
+use <?= $entity->getClassName(); ?>;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
- * @method <?php echo $entity->getShortClassName(); ?>|null find($id, $lockMode = null, $lockVersion = null)
- * @method <?php echo $entity->getShortClassName(); ?>|null findOneBy(array $criteria, array $orderBy = null)
- * @method <?php echo $entity->getShortClassName(); ?>[]    findAll()
- * @method <?php echo $entity->getShortClassName(); ?>[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method <?= $entity->getShortClassName(); ?>|null find($id, $lockMode = null, $lockVersion = null)
+ * @method <?= $entity->getShortClassName(); ?>|null findOneBy(array $criteria, array $orderBy = null)
+ * @method <?= $entity->getShortClassName(); ?>[]    findAll()
+ * @method <?= $entity->getShortClassName(); ?>[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class <?php echo $repository->getShortClassName(); ?> extends NestedTreeRepository
+class <?= $repository->getShortClassName(); ?> extends NestedTreeRepository
 {
 
     public function __construct(EntityManagerInterface $manager)
     {
-        parent::__construct($manager, $manager->getClassMetadata(<?php echo $entity->getShortClassName(); ?>::class));
+        parent::__construct($manager, $manager->getClassMetadata(<?= $entity->getShortClassName(); ?>::class));
     }
 
-    public function findRoot(bool $create = false) : ?<?php echo $entity->getShortClassName(); ?>
+    public function findRoot(bool $create = false) : ?<?= $entity->getShortClassName(); ?>
     {
         $root = $this->getRootNodesQueryBuilder()
             ->setMaxResults(1)
@@ -28,7 +28,7 @@ class <?php echo $repository->getShortClassName(); ?> extends NestedTreeReposito
             ->getOneOrNullResult();
 
         if (null === $root && $create) {
-            $root = new <?php echo $entity->getShortClassName(); ?>();
+            $root = new <?= $entity->getShortClassName(); ?>();
             $this->_em->persist($root);
             $this->_em->flush();
         }

@@ -67,7 +67,7 @@
 
 
 // Vendors
-@import "~umbrella_core/vendor/_vendor.scss";
+@import "~umbrella_core/core";
 
 //@import "vendor/daterangepicker";
 //@import "vendor/bootstrap-timepicker.min";
@@ -84,7 +84,6 @@
 //@import "plugins/daterange";
 @import "plugins/datepicker";
 @import "plugins/datetimepicker";
-@import "plugins/bootstrap-tagsinput";
 @import "plugins/dragula";
 //@import "plugins/dropzone";
 //@import "plugins/form-wizard";
@@ -94,7 +93,6 @@
 @import "plugins/simplebar";
 @import "plugins/toast";
 @import "plugins/confirm";
-@import "plugins/tags_input";
 //@import "plugins/bootstrap-touchspin";
 //@import "plugins/bootstrap-timepicker";
 //@import "plugins/summernote";

@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrella\AdminBundle\Security;
+namespace Umbrella\AdminBundle\Security\Exception;
 
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 

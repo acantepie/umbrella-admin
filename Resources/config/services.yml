@@ -11,7 +11,7 @@ services:
 
     Umbrella\AdminBundle\Controller\SecurityController:
         bind:
-            $retryTtl: "%umbrella_admin.user.security.password_request_ttl%"
+            $retryTtl: "%umbrella_admin.security.password_request_ttl%"
 
     # Table
     Umbrella\AdminBundle\DataTable\Column\UserNameColumnType:
@@ -23,6 +23,7 @@ services:
     Umbrella\AdminBundle\Form\UserType:
 
     # Security
+    Umbrella\AdminBundle\Security\LoginFormAuthenticator:
     Umbrella\AdminBundle\Security\AuthenticationEntryPoint:
     Umbrella\AdminBundle\Security\UserProvider:
     Umbrella\AdminBundle\Security\UserChecker:
