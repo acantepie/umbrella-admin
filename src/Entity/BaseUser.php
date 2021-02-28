@@ -22,12 +22,11 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
  */
 class BaseUser implements EquatableInterface, \Serializable, AdminUserInterface
 {
-    const ROLE_DEFAULT = 'ROLE_USER';
-
     use ActiveTrait;
     use IdTrait;
     use SearchTrait;
     use TimestampTrait;
+    const ROLE_DEFAULT = 'ROLE_USER';
 
     /**
      * @var string|null
