@@ -4,7 +4,7 @@ namespace Umbrella\AdminBundle\DataTable\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
-use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Column\PropertyColumnType;
 use Umbrella\CoreBundle\Component\UmbrellaFile\UmbrellaFileHelper;
 use Umbrella\CoreBundle\Utils\HtmlUtils;
 

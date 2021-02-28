@@ -4,13 +4,13 @@ namespace Umbrella\AdminBundle\DataTable;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Umbrella\CoreBundle\Component\Action\Type\AddActionType;
-use Umbrella\CoreBundle\Component\Column\Type\LinkListColumnType;
-use Umbrella\CoreBundle\Component\Column\Type\ManyColumnType;
-use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Action\AddActionType;
+use Umbrella\CoreBundle\Component\DataTable\Column\LinkListColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Column\ManyColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Column\PropertyColumnType;
 use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
-use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
-use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\CoreBundle\Component\DataTable\DataTableType;
+use Umbrella\CoreBundle\Component\DataTable\ToolbarBuilder;
 use Umbrella\CoreBundle\Component\UmbrellaLink\UmbrellaLinkList;
 use Umbrella\CoreBundle\Form\SearchType;
 
