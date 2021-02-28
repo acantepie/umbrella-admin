@@ -58,6 +58,14 @@ table.dataTable {
             background-color: rgba($primary, 0.15);
         }
     }
+
+    .drag-handle {
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+        text-align: center;
+        cursor: move;
+    }
 }
 
 .dataTables_info {
