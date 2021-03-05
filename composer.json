@@ -15,6 +15,7 @@
         "psr-4": {"Umbrella\\AdminBundle\\": "src/"}
     },
     "require": {
-        "umbrella2/corebundle": "dev-master"
+        "umbrella2/corebundle": "dev-master",
+        "symfony/mailer": "5.2.*"
     }
 }

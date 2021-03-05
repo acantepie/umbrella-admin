@@ -5,9 +5,9 @@ import "metismenu";
 import "simplebar"
 
 // components
-import Sidebar from "umbrella_admin/components/Sidebar";
-import Layout from "umbrella_admin/components/Layout";
-import Notification from "umbrella_admin/components/Notification";
+import Sidebar from "./components/Sidebar";
+import Layout from "./components/Layout";
+import Notification from "./components/Notification";
 
 umbrellaApp.use('[data-mount=Sidebar]', Sidebar);
 umbrellaApp.use('[data-mount=Layout]', Layout);

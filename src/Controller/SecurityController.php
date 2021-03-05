@@ -72,7 +72,7 @@ class SecurityController extends BaseController
             if (null !== $user) {
                 $user->setConfirmationToken(rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '='));
                 $this->userManager->update($user);
-                $userMailer->sendPasswordRequestEmail($user);
+                $userMailer->sendPasswordRequest($user);
             }
 
             return $this->redirectToRoute('umbrella_admin_security_passwordrequestsuccess', [

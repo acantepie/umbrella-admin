@@ -17,7 +17,6 @@
 
 //Fonts
 @import "fonts/nunito";
-@import '~@mdi/font/scss/materialdesignicons.scss';
 @import '~@iconscout/unicons/css/animation.css';
 @import '~@iconscout/unicons/css/before.css';
 @import '~@iconscout/unicons/css/line.css';
@@ -50,10 +49,7 @@
 //@import "components/steps";
 @import "components/spinner";
 //@import "components/hero";
-@import "components/toolbar";
 @import "components/logo";
-@import "components/umbrellafile";
-@import "components/umbrellacollection";
 
 //Pages
 @import "pages/authentication";
@@ -67,7 +63,7 @@
 
 
 // Vendors
-@import "~umbrella_core/core";
+@import "~umbrella_core/scss/core";
 
 //@import "vendor/daterangepicker";
 //@import "vendor/bootstrap-timepicker.min";
@@ -75,15 +71,13 @@
 
 
 // Plugins
-@import "plugins/treegrid";
 //@import "plugins/apexcharts";
 //@import "plugins/britechart";
 //@import "plugins/calendar";
 //@import "plugins/chartjs";
 @import "plugins/datatable";
 //@import "plugins/daterange";
-@import "plugins/datepicker";
-@import "plugins/datetimepicker";
+//@import "plugins/datepicker";
 @import "plugins/dragula";
 //@import "plugins/dropzone";
 //@import "plugins/form-wizard";
@@ -92,7 +86,6 @@
 @import "plugins/select2";
 @import "plugins/simplebar";
 @import "plugins/toast";
-@import "plugins/confirm";
 //@import "plugins/bootstrap-touchspin";
 //@import "plugins/bootstrap-timepicker";
 //@import "plugins/summernote";

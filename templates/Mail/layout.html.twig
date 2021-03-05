@@ -77,10 +77,13 @@
             width: 100%;
         }
 
-        .header .logo {
-            font-weight: bold;
-            font-size: 35px;
+        .header h1 {
             color: #666;
+            Margin-bottom: 0px
+        }
+
+        .header .content-block {
+            text-align: center;
         }
 
         .main {
@@ -311,7 +314,10 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td class="content-block">
-                                            {% include '@UmbrellaAdmin/_logo.html.twig' %}
+                                            {% if null != admin_theme_logo() %}
+                                                <img class="logo-img" src="{{ asset(admin_theme_logo()) }}" width="50" style="max-width: 50px">
+                                            {% endif %}
+                                            <h1>{{ admin_theme_name() }}</h1>
                                         </td>
                                     </tr>
                                 </table>

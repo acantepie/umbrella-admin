@@ -8,66 +8,6 @@
     }
 }
 
-table.dataTable {
-    border-collapse: collapse !important;
-    margin-bottom: 15px !important;
-
-    // Change icons view
-    thead {
-        .sorting,
-        .sorting_asc,
-        .sorting_desc,
-        .sorting_asc_disabled,
-        .sorting_desc_disabled{
-            &:before {
-                right: 0.5rem;
-                content: "\F035D";
-                font-family: "Material Design Icons";
-                font-size: 1rem;
-                top: 10px;
-            }
-            &:after {
-                right: 0.5em;
-                content: "\F0360";
-                font-family: "Material Design Icons";
-                top: 4px;
-                font-size: 1rem;
-            }
-        }
-    }
-
-    tbody {
-        // Multi select table
-
-        > tr.selected, >tr>.selected {
-            background-color: rgba($primary, 0.125);
-            
-            td {
-                border-color: rgba($primary, 0.125);
-            }
-        }
-        td {
-            &:focus {
-                outline: none !important;
-            }
-        }
-        // Key Tables
-        th.focus,td.focus{
-            outline: 2px solid $primary !important;
-            outline-offset: -1px;
-            background-color: rgba($primary, 0.15);
-        }
-    }
-
-    .drag-handle {
-        width: 36px;
-        height: 36px;
-        font-size: 24px;
-        text-align: center;
-        cursor: move;
-    }
-}
-
 .dataTables_info {
     font-weight: $font-weight-semibold;
 }

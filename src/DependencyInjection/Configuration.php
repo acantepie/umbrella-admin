@@ -101,7 +101,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->arrayNode('mailer')->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode('from_name')->defaultNull()->end()
+                            ->scalarNode('from_name')->defaultValue('')->end()
                             ->scalarNode('from_email')->defaultValue('no-reply@umbrella.dev')->end();
     }
 
