@@ -25,28 +25,7 @@ class <?= $entity->getShortClassName(); ?> implements NestedTreeEntityInterface
     use NestedTreeEntityTrait;
 
     /**
-     * @var int
-     * @Gedmo\TreeLevel
-     * @ORM\Column(type="integer")
-     */
-    public $level;
-
-    /**
-     * @var int
-     * @Gedmo\TreeLeft
-     * @ORM\Column(type="integer", name="`left`")
-     */
-    public $left;
-
-    /**
-     * @var int
-     * @Gedmo\TreeRight
-     * @ORM\Column(type="integer", name="`right`")
-     */
-    public $right;
-
-    /**
-     * @var <?= $entity->getShortClassName(); ?>
+     * @var <?= $entity->getShortClassName(); ?>|null
      * @Gedmo\TreeRoot
      * @ORM\ManyToOne(targetEntity="<?= $entity->getShortClassName(); ?>")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
