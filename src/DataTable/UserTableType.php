@@ -5,15 +5,18 @@ namespace Umbrella\AdminBundle\DataTable;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Umbrella\AdminBundle\DataTable\Column\UserNameColumnType;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
+use Umbrella\CoreBundle\Component\DataTable\Column\BooleanColumnType;
 use Umbrella\CoreBundle\Component\DataTable\Column\DateColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Column\LinkListColumnType;
 use Umbrella\CoreBundle\Component\DataTable\Column\ManyColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Column\ToggleColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Column\WidgetColumnType;
 use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\DataTable\DataTableType;
 use Umbrella\CoreBundle\Component\DataTable\ToolbarBuilder;
-use Umbrella\CoreBundle\Component\UmbrellaLink\UmbrellaLinkList;
 use Umbrella\CoreBundle\Component\Widget\Type\AddLinkType;
+use Umbrella\CoreBundle\Component\Widget\Type\RowDeleteLinkType;
+use Umbrella\CoreBundle\Component\Widget\Type\RowEditLinkType;
+use Umbrella\CoreBundle\Component\Widget\WidgetBuilder;
 use Umbrella\CoreBundle\Form\SearchType;
 
 /**
@@ -53,17 +56,20 @@ class UserTableType extends DataTableType
         $builder->add('groups', ManyColumnType::class, [
             'one_path' => 'title',
         ]);
-        $builder->add('active', ToggleColumnType::class, [
-            'route' => 'umbrella_admin_user_toggleactive',
-            'route_params' => function ($entity) {
-                return ['id' => $entity->id];
-            },
-        ]);
-        $builder->add('actions', LinkListColumnType::class, [
-            'link_builder' => function (UmbrellaLinkList $linkList, $entity) {
-                $linkList->addXhrEdit('umbrella_admin_user_edit', ['id' => $entity->id]);
-                $linkList->addXhrDelete('umbrella_admin_user_delete', ['id' => $entity->id]);
-            },
+        $builder->add('active', BooleanColumnType::class);
+
+        $builder->add('links', WidgetColumnType::class, [
+            'build' => function (WidgetBuilder $builder, AdminUserInterface $entity) {
+                $builder->add('add', RowEditLinkType::class, [
+                    'route' => 'umbrella_admin_user_edit',
+                    'route_params' => ['id' => $entity->getId()]
+                ]);
+
+                $builder->add('delete', RowDeleteLinkType::class, [
+                    'route' => 'umbrella_admin_user_delete',
+                    'route_params' => ['id' => $entity->getId()]
+                ]);
+            }
         ]);
 
         $builder->useEntityAdapter([

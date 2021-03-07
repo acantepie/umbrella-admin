@@ -5,12 +5,14 @@ namespace <?= $table->getNamespace(); ?>;
 use <?= $entity->getClassName(); ?>;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\DataTable\Column\PropertyColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Column\LinkListColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Column\WidgetColumnType;
 use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\DataTable\DataTableType;
 use Umbrella\CoreBundle\Component\DataTable\ToolbarBuilder;
-use Umbrella\CoreBundle\Component\UmbrellaLink\UmbrellaLinkList;
 use Umbrella\CoreBundle\Component\Widget\Type\AddLinkType;
+use Umbrella\CoreBundle\Component\Widget\Type\RowDeleteLinkType;
+use Umbrella\CoreBundle\Component\Widget\Type\RowEditLinkType;
+use Umbrella\CoreBundle\Component\Widget\WidgetBuilder;
 
 class <?= $table->getShortClassName(); ?> extends DataTableType
 {
@@ -32,16 +34,23 @@ class <?= $table->getShortClassName(); ?> extends DataTableType
     public function buildTable(DataTableBuilder $builder, array $options = array())
     {
         $builder->add('id', PropertyColumnType::class);
-        $builder->add('actions', LinkListColumnType::class, array(
-            'link_builder' => function (UmbrellaLinkList $linkList, <?= $entity->getShortClassName(); ?> $entity) {
-<?php if ('modal' === $view_type) {  ?>
-                $linkList->addXhrEdit('<?= $routename_prefix; ?>_edit', ['id' => $entity->id]);
-<?php } else { ?>
-                $linkList->addEdit('<?= $routename_prefix; ?>_edit', ['id' => $entity->id]);
+
+        $builder->add('links', WidgetColumnType::class, [
+            'build' => function (WidgetBuilder $builder, <?= $entity->getShortClassName(); ?> $entity) {
+                $builder->add('add', RowEditLinkType::class, [
+                    'route' => '<?= $routename_prefix; ?>_edit',
+                    'route_params' => ['id' => $entity->id],
+<?php if ('modal' !== $view_type) {  ?>
+                    'xhr' => false
 <?php } ?>
-                $linkList->addXhrDelete('<?= $routename_prefix; ?>_delete', ['id' => $entity->id]);
+                ]);
+
+                $builder->add('delete', RowDeleteLinkType::class, [
+                    'route' => '<?= $routename_prefix; ?>_delete',
+                    'route_params' => ['id' => $entity->id]
+                ]);
             }
-        ));
+        ]);
 
         $builder->useNestedEntityAdapter(<?= $entity->getShortClassName(); ?>::class);
     }

@@ -70,20 +70,6 @@ class UserController extends BaseController
     }
 
     /**
-     * @Route("/toggle-active/{id}/{value}", requirements={"id": "\d+"})
-     */
-    public function toggleActiveAction(UserManager $manager, $id, $value)
-    {
-        $entity = $manager->find($id);
-        $this->throwNotFoundExceptionIfNull($entity);
-
-        $entity->setActive(1 == $value);
-        $manager->update($entity);
-
-        return $this->jsResponseBuilder();
-    }
-
-    /**
      * @Route("/delete/{id}", requirements={"id": "\d+"})
      */
     public function deleteAction(UserManager $manager, Request $request, $id)

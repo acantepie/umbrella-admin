@@ -345,7 +345,7 @@ class BaseUser implements EquatableInterface, \Serializable, AdminUserInterface
      */
     public function setActive(bool $active)
     {
-        return $active = $active;
+        $this->active = $active;
     }
 
     /**
