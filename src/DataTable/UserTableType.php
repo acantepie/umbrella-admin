@@ -5,7 +5,6 @@ namespace Umbrella\AdminBundle\DataTable;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Umbrella\AdminBundle\DataTable\Column\UserNameColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Action\AddActionType;
 use Umbrella\CoreBundle\Component\DataTable\Column\DateColumnType;
 use Umbrella\CoreBundle\Component\DataTable\Column\LinkListColumnType;
 use Umbrella\CoreBundle\Component\DataTable\Column\ManyColumnType;
@@ -14,6 +13,7 @@ use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\DataTable\DataTableType;
 use Umbrella\CoreBundle\Component\DataTable\ToolbarBuilder;
 use Umbrella\CoreBundle\Component\UmbrellaLink\UmbrellaLinkList;
+use Umbrella\CoreBundle\Component\Widget\Type\AddLinkType;
 use Umbrella\CoreBundle\Form\SearchType;
 
 /**
@@ -37,9 +37,8 @@ class UserTableType extends DataTableType
     public function buildToolbar(ToolbarBuilder $builder, array $options = [])
     {
         $builder->addFilter('search', SearchType::class);
-        $builder->addAction('add', AddActionType::class, [
+        $builder->addWidget('add_user', AddLinkType::class, [
             'route' => 'umbrella_admin_user_edit',
-            'label' => 'add_user',
             'xhr' => true,
         ]);
     }

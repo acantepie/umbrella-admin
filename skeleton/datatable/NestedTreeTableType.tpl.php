@@ -10,7 +10,7 @@ use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\DataTable\DataTableType;
 use Umbrella\CoreBundle\Component\DataTable\ToolbarBuilder;
 use Umbrella\CoreBundle\Component\UmbrellaLink\UmbrellaLinkList;
-use Umbrella\CoreBundle\Component\DataTable\Action\AddActionType;
+use Umbrella\CoreBundle\Component\Widget\Type\AddLinkType;
 
 class <?= $table->getShortClassName(); ?> extends DataTableType
 {
@@ -18,12 +18,12 @@ class <?= $table->getShortClassName(); ?> extends DataTableType
     public function buildToolbar(ToolbarBuilder $builder, array $options = array())
     {
 <?php if ('modal' === $view_type) {  ?>
-        $builder->addAction('add', AddActionType::class, array(
+        $builder->addWidget('add', AddLinkType::class, array(
             'route' => '<?= $routename_prefix; ?>_edit',
             'xhr' => true
         ));
 <?php } else { ?>
-        $builder->addAction('add', AddActionType::class, array(
+        $builder->addWidget('add', AddLinkType::class, array(
             'route' => '<?= $routename_prefix; ?>_edit'
         ));
 <?php } ?>
