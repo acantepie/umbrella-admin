@@ -26,7 +26,7 @@ class UserNameColumnType extends PropertyColumnType
     /**
      * {@inheritdoc}
      */
-    public function render($user, array $options)
+    public function render($user, array $options) : string
     {
         if (!is_a($user, AdminUserInterface::class)) {
             throw new \RuntimeException(sprintf('Can\'t render user::name, expected "%s" class.', AdminUserInterface::class));
