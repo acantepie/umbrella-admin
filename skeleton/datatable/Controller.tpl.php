@@ -5,6 +5,9 @@ namespace <?= $controller->getNamespace(); ?>;
 use <?= $table->getClassName(); ?>;
 use <?= $entity->getClassName(); ?>;
 use <?= $form->getClassName(); ?>;
+<?php if ('tree' === $structure) { ?>
+use <?= $repository->getClassName(); ?>;
+<?php } ?>
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 <?php if ('page' === $view_type) { ?>
@@ -87,6 +90,24 @@ class <?= $controller->getShortClassName(); ?> extends BaseController
         ]);
 <?php } ?>
     }
+
+<?php if ('tree' === $structure) { ?>
+    /**
+     * @Route("/move/{id}/{direction}", requirements={"id": "\d+"})
+     */
+    public function moveAction(<?= $repository->getShortClassName(); ?> $repository, $id, string $direction)
+    {
+        $entity = $this->findOrNotFound(<?= $entity->getShortClassName(); ?>::class, $id);
+        if ('up' === $direction) {
+            $repository->moveUp($entity);
+        } else {
+            $repository->moveDown($entity);
+        }
+
+        return $this->jsResponseBuilder()
+            ->reloadTable();
+    }
+<?php } ?>
 
     /**
      * @Route(path="/delete/{id}", requirements={"id"="\d+"})

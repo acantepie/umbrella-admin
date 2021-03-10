@@ -43,7 +43,7 @@ class <?= $entity->getShortClassName(); ?> implements NestedTreeEntityInterface
     /**
      * @var <?= $entity->getShortClassName(); ?>[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="<?= $entity->getShortClassName(); ?>", mappedBy="parent", cascade={"ALL"})
+     * @ORM\OneToMany(targetEntity="<?= $entity->getShortClassName(); ?>", mappedBy="parent", cascade={"persist"})
      * @ORM\OrderBy({"left": "ASC"})
      */
     public $children;
