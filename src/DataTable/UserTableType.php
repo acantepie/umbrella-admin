@@ -77,7 +77,7 @@ class UserTableType extends DataTableType
             'query' => function (QueryBuilder $qb, $formData) {
                 if (isset($formData['search'])) {
                     $qb->andWhere('lower(e.search) LIKE :search');
-                    $qb->setParameter('search', '%' . strtolower($formData['search']) . '%');
+                    $qb->setParameter('search', '%' . $formData['search'] . '%');
                 }
             }
         ]);
