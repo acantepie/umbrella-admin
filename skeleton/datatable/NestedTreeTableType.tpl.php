@@ -12,8 +12,7 @@ use Umbrella\CoreBundle\Component\DataTable\ToolbarBuilder;
 use Umbrella\CoreBundle\Component\Widget\Type\AddLinkType;
 use Umbrella\CoreBundle\Component\Widget\Type\RowDeleteLinkType;
 use Umbrella\CoreBundle\Component\Widget\Type\RowEditLinkType;
-use Umbrella\CoreBundle\Component\Widget\Type\RowMoveDownLinkType;
-use Umbrella\CoreBundle\Component\Widget\Type\RowMoveUpLinkType;
+use Umbrella\CoreBundle\Component\Widget\Type\RowMoveLinkType;
 use Umbrella\CoreBundle\Component\Widget\WidgetBuilder;
 
 class <?= $table->getShortClassName(); ?> extends DataTableType
@@ -40,19 +39,10 @@ class <?= $table->getShortClassName(); ?> extends DataTableType
         $builder->add('links', WidgetColumnType::class, [
             'build' => function (WidgetBuilder $builder, <?= $entity->getShortClassName(); ?> $entity) {
 
-                if (!$entity->_isFirstChild()) {
-                    $builder->add('up', RowMoveUpLinkType::class, [
-                        'route' => '<?= $routename_prefix; ?>_move',
-                        'route_params' => ['id' => $entity->id, 'direction' => 'up'],
-                    ]);
-                }
-
-                if (!$entity->_isLastChild()) {
-                    $builder->add('down', RowMoveDownLinkType::class, [
-                        'route' => '<?= $routename_prefix; ?>_move',
-                        'route_params' => ['id' => $entity->id, 'direction' => 'down'],
-                    ]);
-                }
+                $builder->add('move', RowMoveLinkType::class, [
+                    'route' => '<?= $routename_prefix; ?>_move',
+                    'route_params' => ['id' => $entity->id],
+                ]);
 
                 $builder->add('add', RowEditLinkType::class, [
                     'route' => '<?= $routename_prefix; ?>_edit',
