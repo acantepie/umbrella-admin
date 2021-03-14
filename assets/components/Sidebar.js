@@ -1,16 +1,17 @@
-import Component from "umbrella_core/core/Component";
+export default class Sidebar extends HTMLElement {
+    constructor() {
+        super();
 
-export default class Sidebar extends Component {
-    constructor($view) {
-        super($view);
-        this.init();
+        this.$view = $(this).find('.metismenu');
     }
 
-    init() {
+    connectedCallback() {
         this.$view.metisMenu();
+
         $(document).on('click', '.button-menu-mobile', (e) => {
             e.preventDefault();
             $('body').toggleClass('sidebar-enable');
         });
     }
+
 }

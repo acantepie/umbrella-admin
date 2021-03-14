@@ -1,16 +1,32 @@
 // App
-import umbrellaApp from "umbrella_core/Core";
+import  "umbrella_core/Core";
 
 import "metismenu";
 import "simplebar"
 
 // components
 import Sidebar from "./components/Sidebar";
-import Layout from "./components/Layout";
 import Notification from "./components/Notification";
 
-umbrellaApp.use('[data-mount=Sidebar]', Sidebar);
-umbrellaApp.use('[data-mount=Layout]', Layout);
-umbrellaApp.use('[data-mount=Notification]', Notification);
+customElements.define('umbrella-sidebar', Sidebar);
+customElements.define('umbrella-notification', Notification, {extends: 'li'});
 
-export default umbrellaApp;
+// Hyper layout
+const $body = $('body');
+const $window = $(window);
+
+const adjustLayout = () => {
+    // in case of small size, add class enlarge to have minimal menu
+    if ($window.width() >= 767 && $window.width() <= 1028) {
+        $body.attr('data-leftbar-compact-mode', 'condensed');
+    } else {
+        $body.attr('data-leftbar-compact-mode', false);
+    }
+};
+
+adjustLayout();
+
+$window.on('resize', (e) => {
+    e.preventDefault();
+    adjustLayout();
+});

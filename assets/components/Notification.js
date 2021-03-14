@@ -1,18 +1,19 @@
-import Component from "umbrella_core/core/Component";
+import mustache from 'mustache';
 
-export default class Notification extends Component {
+export default class Notification extends HTMLLIElement {
 
-    constructor($view) {
-        super($view);
+    constructor() {
+        super();
 
-        this.refreshUrl = $view.data('refresh-url');
-        this.pollInterval = $view.data('poll-interval'); // second
+        mustache.tags = [ '[[', ']]' ];
+
+        this.$view = $(this);
+        this.refreshUrl = this.$view.data('refresh-url');
+        this.pollInterval = this.$view.data('poll-interval'); // second
         this.refreshXhr = null;
-
-        this._bind();
     }
 
-    _bind() {
+    connectedCallback() {
         this.$view.on('shown.bs.dropdown', () => {
             this._refresh(this.pollInterval >= 1); // refresh only if pollInterval is 1s or more
         });
