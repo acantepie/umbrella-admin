@@ -42,6 +42,8 @@ class <?= $table->getShortClassName(); ?> extends DataTableType
                 $builder->add('move', RowMoveLinkType::class, [
                     'route' => '<?= $routename_prefix; ?>_move',
                     'route_params' => ['id' => $entity->id],
+                    'disable_moveup' => $entity->isFirstChild(),
+                    'disable_movedown' => $entity->isLastChild()
                 ]);
 
                 $builder->add('add', RowEditLinkType::class, [
